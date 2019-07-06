@@ -24,6 +24,9 @@ import java.util.Map;
 @RestController
 public class SmsController {
 
+    /**
+     * 在不同的服务器部署时通过启动命令来设定该变量，目的是区分不同服务器
+     */
     @Value("${sid:sms}")
     private String sid;
 

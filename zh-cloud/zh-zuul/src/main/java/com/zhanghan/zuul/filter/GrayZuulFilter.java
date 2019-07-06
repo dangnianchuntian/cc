@@ -46,7 +46,7 @@ public class GrayZuulFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        return true;
+        return grayBean.isEnabled();
     }
 
     @Override
@@ -60,23 +60,6 @@ public class GrayZuulFilter extends ZuulFilter {
         }
 
         return null;
-    }
-
-
-    private void sendRedirect(String redirectUrl) {
-        RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletResponse response = ctx.getResponse();
-        HttpServletRequest request = ctx.getRequest();
-        try {
-            if (request.getMethod().toUpperCase().equals("POST")) {
-                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
-            } else {
-                response.setStatus(HttpStatus.MOVED_PERMANENTLY.value());
-            }
-            response.setHeader(HttpHeaders.LOCATION, redirectUrl);
-            response.flushBuffer();
-        } catch (Exception ex) {
-        }
     }
 
     private boolean shouldBeRedirected() {
@@ -106,7 +89,7 @@ public class GrayZuulFilter extends ZuulFilter {
         return false;
     }
 
-    private Object getParment(HttpServletRequest request, String parmentKey) {
+    private static Object getParment(HttpServletRequest request, String parmentKey) {
 
         try {
 
@@ -130,12 +113,15 @@ public class GrayZuulFilter extends ZuulFilter {
 
     }
 
-    private String generateRedirectUrl(String s) {
+    private static String generateRedirectUrl(String graySuffix) {
+
         HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
         String queryParams = request.getQueryString();
         Object originalRequestPath = request.getRequestURI();
+
         String[] modifiedRequestPathArr = (originalRequestPath.toString().split("/", 3));
-        modifiedRequestPathArr[1] = modifiedRequestPathArr[1] + s;
+        modifiedRequestPathArr[1] = modifiedRequestPathArr[1] + graySuffix;
+
         StringBuilder stringBuilder = new StringBuilder();
         for (String str : modifiedRequestPathArr) {
             if (StringUtils.isNotEmpty(str)) {
@@ -143,7 +129,29 @@ public class GrayZuulFilter extends ZuulFilter {
                 stringBuilder.append(str);
             }
         }
+
         return stringBuilder.toString() + (queryParams == null ? "" : ("?" + queryParams));
+    }
+
+
+    private void sendRedirect(String redirectUrl) {
+
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletResponse response = ctx.getResponse();
+        HttpServletRequest request = ctx.getRequest();
+
+        try {
+            if (request.getMethod().toUpperCase().equals("POST")) {
+                response.setStatus(HttpServletResponse.SC_TEMPORARY_REDIRECT);
+            } else {
+                response.setStatus(HttpStatus.MOVED_PERMANENTLY.value());
+            }
+            response.setHeader(HttpHeaders.LOCATION, redirectUrl);
+            response.flushBuffer();
+
+        } catch (Exception ex) {
+        }
+
     }
 
 
