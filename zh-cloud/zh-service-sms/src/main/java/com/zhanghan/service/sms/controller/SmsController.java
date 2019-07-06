@@ -1,14 +1,15 @@
+/*
+ * Copyright (c) 2019. zhanghan_java@163.com All Rights Reserved.
+ * 项目名称：灰度实战
+ * 类名称：SmsController.java
+ * 创建人：张晗
+ * 联系方式：zhanghan_java@163.com
+ * 开源地址: https://github.com/dangnianchuntian/springboot
+ * 博客地址: https://blog.csdn.net/zhanghan18333611647
+ */
+
 package com.zhanghan.service.sms.controller;
 
-/**
- * <p>Title: Nepxion Discovery</p>
- * <p>Description: Nepxion Discovery</p>
- * <p>Copyright: Copyright (c) 2017-2050</p>
- * <p>Company: Nepxion</p>
- *
- * @author Haojun Ren
- * @version 1.0
- */
 
 import com.zhanghan.service.sms.controller.request.SmsRequest;
 import org.springframework.beans.factory.annotation.Value;

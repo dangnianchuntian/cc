@@ -18,7 +18,7 @@ public class ZhZuulApplication {
 	}
 
 	@Bean
-	public GrayZuulFilter myZuulFilter() {
+	public GrayZuulFilter grayZuulFilter() {
 		return new GrayZuulFilter();
 	}
 
