@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.zhanghan</groupId>
-    <artifactId>zh-service-a2</artifactId>
+    <artifactId>zh-service-push</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>zh-service-a2</name>
+    <name>zh-service-push</name>
 
     <dependencies>
 
