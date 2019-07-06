@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.7.RELEASE</version>
+        <version>2.1.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -19,16 +19,16 @@
     <modules>
         <module>zh-eureka</module>
         <module>zh-zuul</module>
-        <module>zh-service-a1</module>
-        <module>zh-service-a2</module>
+        <module>zh-service-sms</module>
+        <module>zh-service-push</module>
     </modules>
 
 
     <properties>
-        <spring.cloud.version>Finchley.SR3</spring.cloud.version>
+        <spring.cloud.version>Greenwich.RELEASE</spring.cloud.version>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <apollo-client.version>1.0.0</apollo-client.version>
+        <apollo-client.version>1.4.0</apollo-client.version>
         <json-lib.version>2.4</json-lib.version>
     </properties>
 
