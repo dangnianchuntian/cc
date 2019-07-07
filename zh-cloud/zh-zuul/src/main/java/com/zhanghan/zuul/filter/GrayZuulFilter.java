@@ -62,6 +62,11 @@ public class GrayZuulFilter extends ZuulFilter {
         return null;
     }
 
+    /**
+     * 是否为灰度请求 依据条件同时满足1和2: 1.请求在灰度列表中 2.companyNo为配置的灰度companyNo
+     *
+     * @return
+     */
     private boolean shouldBeRedirected() {
 
         HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
@@ -89,6 +94,13 @@ public class GrayZuulFilter extends ZuulFilter {
         return false;
     }
 
+    /**
+     * 获取post请求的body
+     *
+     * @param request
+     * @param parmentKey
+     * @return
+     */
     private static Object getParment(HttpServletRequest request, String parmentKey) {
 
         try {
@@ -113,6 +125,12 @@ public class GrayZuulFilter extends ZuulFilter {
 
     }
 
+    /**
+     * 获取重定向URL
+     *
+     * @param graySuffix 灰度后缀
+     * @return
+     */
     private static String generateRedirectUrl(String graySuffix) {
 
         HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
@@ -133,8 +151,12 @@ public class GrayZuulFilter extends ZuulFilter {
         return stringBuilder.toString() + (queryParams == null ? "" : ("?" + queryParams));
     }
 
-
-    private void sendRedirect(String redirectUrl) {
+    /**
+     * 进行重定向
+     *
+     * @param redirectUrl 重定向URL
+     */
+    private static void sendRedirect(String redirectUrl) {
 
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletResponse response = ctx.getResponse();
